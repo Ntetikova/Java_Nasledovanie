@@ -1,4 +1,5 @@
 package ru.netology.repository;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import ru.netology.inheritance.Book;
@@ -48,10 +49,38 @@ public class ProductRepositoryTest {
         repo.save(Book4);
         repo.removeById(Smartphone3.getId());
 
-        Product[] expected = {Smartphone1, Smartphone2, Book1, Book2, Book3, Book4};;
+        Product[] expected = {Smartphone1, Smartphone2, Book1, Book2, Book3, Book4};
+        ;
         Product[] actual = repo.getProducts();
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
+    @Test
+    public void testFindById() {
+        ProductRepository repo = new ProductRepository();
+        repo.save(Smartphone3);
+        repo.findById(Smartphone3.getId());
+
+        Product[] expected = {Smartphone3};
+        Product[] actual = repo.getProducts();
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+    @Test
+    public void testNotFoundException() {
+        ProductRepository repo = new ProductRepository();
+        repo.save(Smartphone1);
+        repo.save(Smartphone2);
+        repo.save(Smartphone3);
+
+        repo.save(Book1);
+        repo.save(Book2);
+        repo.save(Book3);
+        repo.save(Book4);
+
+        Assertions.assertThrows(NotFoundException.class, () ->{
+            repo.removeById(-1);
+        });
+    }
 }
