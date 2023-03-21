@@ -14,13 +14,13 @@ public class ProductRepository {
         products = tmp;
     }
 
-    public  Product[] findAll() {
+    public Product[] findAll() {
         return products;
     }
 
     public void removeById(int id) throws NotFoundException {
         if (findById(id) == null) {
-            throw new NotFoundException( "Element with id: " + id + " not found");
+            throw new NotFoundException("Element with id: " + id + " not found");
         }
 
         Product[] tmp = new Product[products.length - 1];
@@ -33,14 +33,16 @@ public class ProductRepository {
         }
         products = tmp;
     }
-public Product findById(int id) {
-        for(Product product : products) {
+
+    public Product findById(int id) {
+        for (Product product : products) {
             if (product.getId() == id) {
                 return product;
             }
         }
         return null;
-}
+    }
+
     public Product[] getProducts() {
         return products;
     }

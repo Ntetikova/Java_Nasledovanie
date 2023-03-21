@@ -67,6 +67,7 @@ public class ProductRepositoryTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
     @Test
     public void testNotFoundException() {
         ProductRepository repo = new ProductRepository();
@@ -79,7 +80,7 @@ public class ProductRepositoryTest {
         repo.save(Book3);
         repo.save(Book4);
 
-        Assertions.assertThrows(NotFoundException.class, () ->{
+        Assertions.assertThrows(NotFoundException.class, () -> {
             repo.removeById(-1);
         });
     }
